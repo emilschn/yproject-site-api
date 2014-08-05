@@ -1,0 +1,15 @@
+users : 
+    type: rest
+    resource:     "WDGCoreBundle:UserRest"
+    name_prefix:  api_user_
+
+projects : 
+    type: rest
+    resource:     "WDGCoreBundle:ProjectRest"
+    name_prefix:  api_project_
+
+members_roles:
+    type:     rest
+    parent:   projects
+    resource: "WDGCoreBundle:ProjectsUsersRest"
+    name_prefix:  api_project_users_

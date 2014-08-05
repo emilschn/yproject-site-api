@@ -1,0 +1,8 @@
+parameters:
+#    wdg_core.example.class: WDG\CoreBundle\Example
+
+services:
+#    wdg_core.example:
+#        class: %wdg_core.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
