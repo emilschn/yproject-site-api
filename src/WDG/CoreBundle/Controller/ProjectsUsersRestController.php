@@ -199,7 +199,7 @@ class ProjectsUsersRestController extends FOSRestController
      *
      * @throws NotFoundHttpException when user not exist
      */
-/*    public function putRolesMembersAction(Request $request, $idProject, $idRole, $idMember)
+    public function putRolesMembersAction(Request $request, $idProject, $idRole, $idMember)
     {
         //Entity Manager
         $em = $this->getDoctrine()->getManager();
@@ -209,22 +209,14 @@ class ProjectsUsersRestController extends FOSRestController
         $form = $this->createForm(new SfWdgProjectsUsersType(), $member);
         $form->bind($request);
 
-
         //Récupération des informations de l'utilisateur
-        $user = new SfWdgUsers();
-        $user = $form->get('users')->getData();
+        $user = $this->getDoctrine()->getRepository('WDGCoreBundle:SfWdgUsers')->find($idMember);
         $newIdUser = $user->getId();
-
 
         //Récuperation des informations du rôle
         $role = new SfWdgRoles();
         $role = $form->get('roles')->getData();
         $newIdRole = $role->getId();
-
-
-
-            $view = $this->view($form, 200);
-            return $this->handleView($view);
 
         //Récupération des informations du projet ($id = id passé en paramètre de l'URL)
         $project = $this->getDoctrine()->getRepository('WDGCoreBundle:SfWdgProjects')->find($idProject);
@@ -244,9 +236,12 @@ class ProjectsUsersRestController extends FOSRestController
         //Insertion en base
         $em->persist($member);
         $em->flush();
+
+            $view = $this->view($role, 200);
+            return $this->handleView($view);
         return self::redirectAction($member, Codes::HTTP_CREATED);
           
-    }*/
+    }
 
 
     //--------------------------------------------------------------------------------------------//
