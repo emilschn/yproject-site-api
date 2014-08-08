@@ -90,6 +90,18 @@ class SfWdgOrganisations
     private $projects;
 
     /**
+     * @ORM\OneToMany(targetEntity="SfWdgOrganisationsMembers", mappedBy="organisations")
+     */
+    private $organisationsMembers;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->organisationsMembers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return integer 
@@ -442,5 +454,38 @@ class SfWdgOrganisations
     public function getProjects()
     {
         return $this->projects;
+    }
+
+    /**
+     * Add organisationsMembers
+     *
+     * @param \WDG\CoreBundle\Entity\SfWdgOrganisationsMembers $organisationsMembers
+     * @return SfWdgOrganisations
+     */
+    public function addOrganisationsMember(\WDG\CoreBundle\Entity\SfWdgOrganisationsMembers $organisationsMembers)
+    {
+        $this->organisationsMembers[] = $organisationsMembers;
+
+        return $this;
+    }
+
+    /**
+     * Remove organisationsMembers
+     *
+     * @param \WDG\CoreBundle\Entity\SfWdgOrganisationsMembers $organisationsMembers
+     */
+    public function removeOrganisationsMember(\WDG\CoreBundle\Entity\SfWdgOrganisationsMembers $organisationsMembers)
+    {
+        $this->organisationsMembers->removeElement($organisationsMembers);
+    }
+
+    /**
+     * Get organisationsMembers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOrganisationsMembers()
+    {
+        return $this->organisationsMembers;
     }
 }

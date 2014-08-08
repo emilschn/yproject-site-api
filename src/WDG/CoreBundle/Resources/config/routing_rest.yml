@@ -8,8 +8,19 @@ projects :
     resource:     "WDGCoreBundle:ProjectRest"
     name_prefix:  api_project_
 
-members_roles:
+projects_members:
     type:     rest
     parent:   projects
     resource: "WDGCoreBundle:ProjectsUsersRest"
     name_prefix:  api_project_users_
+
+organisations:
+    type:     rest
+    resource: "WDGCoreBundle:OrganisationRest"
+    name_prefix:  api_organisation_
+
+organisations_members:
+    type:     rest
+    parent:   organisations
+    resource: "WDGCoreBundle:OrganisationsUsersRest"
+    name_prefix:  api_organisations_users_
