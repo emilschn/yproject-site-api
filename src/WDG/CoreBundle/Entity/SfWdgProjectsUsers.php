@@ -88,12 +88,6 @@ class SfWdgProjectsUsers
         return $this->users;
     }
 
-
-    public function addUsers(\WDG\CoreBundle\Entity\SfWdgUsers  $users)
-    {
-      $this->children->add($users);
-    }
-
     /**
      * Set projects
      *

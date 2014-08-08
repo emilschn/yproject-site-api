@@ -20,7 +20,7 @@ class SfWdgUsers
     private $wpUserId;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="integer", length=100, nullable=true)
      */
     private $userGender;
 
@@ -148,11 +148,6 @@ class SfWdgUsers
      * @ORM\OneToMany(targetEntity="SfWdgTasksUsersAssigned", mappedBy="users")
      */
     private $tasksUsersAssigned;
-
-    /**
-     * @ORM\OneToMany(targetEntity="SfWdgOrganisationsMembers", mappedBy="users")
-     */
-    private $organisationsMembers;
     /**
      * Constructor
      */
@@ -161,7 +156,6 @@ class SfWdgUsers
         $this->follow = new \Doctrine\Common\Collections\ArrayCollection();
         $this->projectsUsers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->tasksUsersAssigned = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->organisationsMembers = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -823,39 +817,6 @@ class SfWdgUsers
     public function getTasksUsersAssigned()
     {
         return $this->tasksUsersAssigned;
-    }
-
-    /**
-     * Add organisationsMembers
-     *
-     * @param \WDG\CoreBundle\Entity\SfWdgOrganisationsMembers $organisationsMembers
-     * @return SfWdgUsers
-     */
-    public function addOrganisationsMember(\WDG\CoreBundle\Entity\SfWdgOrganisationsMembers $organisationsMembers)
-    {
-        $this->organisationsMembers[] = $organisationsMembers;
-
-        return $this;
-    }
-
-    /**
-     * Remove organisationsMembers
-     *
-     * @param \WDG\CoreBundle\Entity\SfWdgOrganisationsMembers $organisationsMembers
-     */
-    public function removeOrganisationsMember(\WDG\CoreBundle\Entity\SfWdgOrganisationsMembers $organisationsMembers)
-    {
-        $this->organisationsMembers->removeElement($organisationsMembers);
-    }
-
-    /**
-     * Get organisationsMembers
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getOrganisationsMembers()
-    {
-        return $this->organisationsMembers;
     }
 
     public function __toString()

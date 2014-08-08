@@ -26,7 +26,8 @@ class SfWdgRolesType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'WDG\CoreBundle\Entity\SfWdgRoles'
+            'data_class' => 'WDG\CoreBundle\Entity\SfWdgRoles',
+            'csrf_protection' => false,
         ));
     }
 
@@ -35,6 +36,6 @@ class SfWdgRolesType extends AbstractType
      */
     public function getName()
     {
-        return 'wdg_corebundle_sfwdgroles';
+        return 'roles';
     }
 }

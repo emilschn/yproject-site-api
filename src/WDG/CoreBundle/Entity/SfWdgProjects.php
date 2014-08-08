@@ -30,6 +30,12 @@ class SfWdgProjects
     private $projectDescription;
 
     /**
+     * @ORM\OneToOne(targetEntity="SfWdgTasks", inversedBy="projects")
+     * @ORM\JoinColumn(name="sfWdgTasksId", referencedColumnName="id", unique=true)
+     */
+    private $tasks;
+
+    /**
      * @ORM\OneToOne(targetEntity="SfWdgOrganisations", inversedBy="projects")
      * @ORM\JoinColumn(name="sfWdgOrganisationsId", referencedColumnName="id", unique=true)
      */
@@ -51,11 +57,6 @@ class SfWdgProjects
     private $discussions;
 
     /**
-     * @ORM\OneToMany(targetEntity="SfWdgTasks", mappedBy="sfWdgProjects")
-     */
-    private $sfWdgTasks;
-
-    /**
      * @ORM\OneToMany(targetEntity="SfWdgProjectsUsers", mappedBy="projects")
      */
     private $projectsUsers;
@@ -74,7 +75,6 @@ class SfWdgProjects
      */
     public function __construct()
     {
-        $this->sfWdgTasks = new \Doctrine\Common\Collections\ArrayCollection();
         $this->projectsUsers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->projectsTags = new \Doctrine\Common\Collections\ArrayCollection();
         $this->projectsComments = new \Doctrine\Common\Collections\ArrayCollection();
@@ -157,6 +157,29 @@ class SfWdgProjects
     public function getProjectDescription()
     {
         return $this->projectDescription;
+    }
+
+    /**
+     * Set tasks
+     *
+     * @param \WDG\CoreBundle\Entity\SfWdgTasks $tasks
+     * @return SfWdgProjects
+     */
+    public function setTasks(\WDG\CoreBundle\Entity\SfWdgTasks $tasks = null)
+    {
+        $this->tasks = $tasks;
+
+        return $this;
+    }
+
+    /**
+     * Get tasks
+     *
+     * @return \WDG\CoreBundle\Entity\SfWdgTasks 
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
     }
 
     /**
@@ -249,39 +272,6 @@ class SfWdgProjects
     public function getDiscussions()
     {
         return $this->discussions;
-    }
-
-    /**
-     * Add sfWdgTasks
-     *
-     * @param \WDG\CoreBundle\Entity\SfWdgTasks $sfWdgTasks
-     * @return SfWdgProjects
-     */
-    public function addSfWdgTask(\WDG\CoreBundle\Entity\SfWdgTasks $sfWdgTasks)
-    {
-        $this->sfWdgTasks[] = $sfWdgTasks;
-
-        return $this;
-    }
-
-    /**
-     * Remove sfWdgTasks
-     *
-     * @param \WDG\CoreBundle\Entity\SfWdgTasks $sfWdgTasks
-     */
-    public function removeSfWdgTask(\WDG\CoreBundle\Entity\SfWdgTasks $sfWdgTasks)
-    {
-        $this->sfWdgTasks->removeElement($sfWdgTasks);
-    }
-
-    /**
-     * Get sfWdgTasks
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getSfWdgTasks()
-    {
-        return $this->sfWdgTasks;
     }
 
     /**
@@ -381,10 +371,5 @@ class SfWdgProjects
     public function getProjectsComments()
     {
         return $this->projectsComments;
-    }
-    
-    public function __toString()
-    {
-        return $this->projectName;
     }
 }

@@ -46,6 +46,11 @@ class SfWdgTasks
     private $users;
 
     /**
+     * @ORM\OneToOne(targetEntity="SfWdgProjects", mappedBy="tasks")
+     */
+    private $projects;
+
+    /**
      * @ORM\OneToMany(targetEntity="SfWdgTasksUsersAssigned", mappedBy="tasks")
      */
     private $tasksUsersAssigned;
@@ -59,12 +64,6 @@ class SfWdgTasks
      * @ORM\OneToMany(targetEntity="SfWdgTasksComments", mappedBy="tasks")
      */
     private $comments;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="SfWdgProjects", inversedBy="sfWdgTasks")
-     * @ORM\JoinColumn(name="sfWdgProjectsId", referencedColumnName="id")
-     */
-    private $sfWdgProjects;
     /**
      * Constructor
      */
@@ -224,6 +223,29 @@ class SfWdgTasks
     }
 
     /**
+     * Set projects
+     *
+     * @param \WDG\CoreBundle\Entity\SfWdgProjects $projects
+     * @return SfWdgTasks
+     */
+    public function setProjects(\WDG\CoreBundle\Entity\SfWdgProjects $projects = null)
+    {
+        $this->projects = $projects;
+
+        return $this;
+    }
+
+    /**
+     * Get projects
+     *
+     * @return \WDG\CoreBundle\Entity\SfWdgProjects 
+     */
+    public function getProjects()
+    {
+        return $this->projects;
+    }
+
+    /**
      * Add tasksUsersAssigned
      *
      * @param \WDG\CoreBundle\Entity\SfWdgTasksUsersAssigned $tasksUsersAssigned
@@ -320,28 +342,5 @@ class SfWdgTasks
     public function getComments()
     {
         return $this->comments;
-    }
-
-    /**
-     * Set sfWdgProjects
-     *
-     * @param \WDG\CoreBundle\Entity\SfWdgProjects $sfWdgProjects
-     * @return SfWdgTasks
-     */
-    public function setSfWdgProjects(\WDG\CoreBundle\Entity\SfWdgProjects $sfWdgProjects = null)
-    {
-        $this->sfWdgProjects = $sfWdgProjects;
-
-        return $this;
-    }
-
-    /**
-     * Get sfWdgProjects
-     *
-     * @return \WDG\CoreBundle\Entity\SfWdgProjects 
-     */
-    public function getSfWdgProjects()
-    {
-        return $this->sfWdgProjects;
     }
 }

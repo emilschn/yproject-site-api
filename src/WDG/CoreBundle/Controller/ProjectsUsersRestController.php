@@ -55,17 +55,20 @@ class ProjectsUsersRestController extends FOSRestController
         $array = '';
         $em = $this->getDoctrine()->getManager();
         $members = $em->getRepository('WDGCoreBundle:SfWdgProjectsUsers')->findBy(array('projects' => $id));
+        if ($members) {
+            foreach ($members as $member) {
+                $users = $em->getRepository('WDGCoreBundle:SfWdgUsers')->findOneBy(array('id' => $member->getUsers()->getId() ));
+                $array[] = $users;
+            }
 
-        foreach ($members as $member) {
-            $users = $em->getRepository('WDGCoreBundle:SfWdgUsers')->findOneBy(array('id' => $member->getUsers()->getId() ));
-            $array[] = $users;
-        }
-
-        if(!$users) {
-            throw $this->createNotFoundException("No members");
+            if(!$users) {
+                throw $this->createNotFoundException("No members");
+            } else {
+                $view = $this->view($array, 200);
+                return $this->handleView($view);
+            }
         } else {
-            $view = $this->view($array, 200);
-            return $this->handleView($view);
+            throw $this->createNotFoundException("No members");
         }
     } // "get_users"     [GET] /projects/{id}/members
 
@@ -127,6 +130,7 @@ class ProjectsUsersRestController extends FOSRestController
         $form = $this->createForm(new SfWdgProjectsUsersType(), $member);
         $form->handleRequest($request);
 
+
         //Récupération des informations de l'utilisateur
         $user = new SfWdgUsers();
         $user = $form->get('users')->getData();
@@ -140,6 +144,9 @@ class ProjectsUsersRestController extends FOSRestController
 
         //Récupération des informations du projet ($id = id passé en paramètre de l'URL)
         $project = $this->getDoctrine()->getRepository('WDGCoreBundle:SfWdgProjects')->find($id);
+        if(!$project) {
+            throw $this->createNotFoundException("Project not found.");
+        }
         
 
         //Ajout de la relation entre l'utilisateur, le role et le projet
@@ -209,14 +216,15 @@ class ProjectsUsersRestController extends FOSRestController
         $form = $this->createForm(new SfWdgProjectsUsersType(), $member);
         $form->bind($request);
 
-        //Récupération des informations de l'utilisateur
-        $user = $this->getDoctrine()->getRepository('WDGCoreBundle:SfWdgUsers')->find($idMember);
-        $newIdUser = $user->getId();
 
-        //Récuperation des informations du rôle
+        //Récuperation des informations du nouveau rôle
         $role = new SfWdgRoles();
         $role = $form->get('roles')->getData();
         $newIdRole = $role->getId();
+
+        //Récupération des informations de l'utilisateur
+        $user = $this->getDoctrine()->getRepository('WDGCoreBundle:SfWdgUsers')->find($idMember);
+        $newIdUser = $user->getId();
 
         //Récupération des informations du projet ($id = id passé en paramètre de l'URL)
         $project = $this->getDoctrine()->getRepository('WDGCoreBundle:SfWdgProjects')->find($idProject);
@@ -231,8 +239,6 @@ class ProjectsUsersRestController extends FOSRestController
             throw $this->createNotFoundException("Relation already exists.");
         }
 
-        
-        
         //Insertion en base
         $em->persist($member);
         $em->flush();

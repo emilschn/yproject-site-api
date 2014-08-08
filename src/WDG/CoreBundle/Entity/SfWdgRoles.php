@@ -28,12 +28,18 @@ class SfWdgRoles
      * @ORM\OneToMany(targetEntity="SfWdgProjectsUsers", mappedBy="roles")
      */
     private $projectsUsers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="SfWdgOrganisationsMembers", mappedBy="roles")
+     */
+    private $organisationsMembers;
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->projectsUsers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->organisationsMembers = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -125,10 +131,41 @@ class SfWdgRoles
         return $this->projectsUsers;
     }
 
+    /**
+     * Add organisationsMembers
+     *
+     * @param \WDG\CoreBundle\Entity\SfWdgOrganisationsMembers $organisationsMembers
+     * @return SfWdgRoles
+     */
+    public function addOrganisationsMember(\WDG\CoreBundle\Entity\SfWdgOrganisationsMembers $organisationsMembers)
+    {
+        $this->organisationsMembers[] = $organisationsMembers;
+
+        return $this;
+    }
+
+    /**
+     * Remove organisationsMembers
+     *
+     * @param \WDG\CoreBundle\Entity\SfWdgOrganisationsMembers $organisationsMembers
+     */
+    public function removeOrganisationsMember(\WDG\CoreBundle\Entity\SfWdgOrganisationsMembers $organisationsMembers)
+    {
+        $this->organisationsMembers->removeElement($organisationsMembers);
+    }
+
+    /**
+     * Get organisationsMembers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOrganisationsMembers()
+    {
+        return $this->organisationsMembers;
+    }
 
     public function __toString()
     {
         return $this->roleName;
     }
 }
-

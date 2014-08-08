@@ -18,6 +18,7 @@ class SfWdgProjectsType extends AbstractType
             ->add('wpProjectId')
             ->add('projectName')
             ->add('projectDescription')
+            ->add('tasks')
             ->add('organisations')
             ->add('events')
             ->add('news')
@@ -31,7 +32,8 @@ class SfWdgProjectsType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'WDG\CoreBundle\Entity\SfWdgProjects'
+            'data_class' => 'WDG\CoreBundle\Entity\SfWdgProjects',
+            'csrf_protection' => false,
         ));
     }
 

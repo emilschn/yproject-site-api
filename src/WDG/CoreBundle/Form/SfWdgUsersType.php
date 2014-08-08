@@ -48,7 +48,8 @@ class SfWdgUsersType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'WDG\CoreBundle\Entity\SfWdgUsers'
+            'data_class' => 'WDG\CoreBundle\Entity\SfWdgUsers',
+            'csrf_protection' => false,
         ));
     }
 
@@ -57,6 +58,6 @@ class SfWdgUsersType extends AbstractType
      */
     public function getName()
     {
-        return 'wdg_corebundle_sfwdgusers';
+        return 'users';
     }
 }
