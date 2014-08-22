@@ -6,3 +6,4 @@
 /bin/
 /composer.phar
 /app/config/routing_rest.yml
+/app/config/parameters.yml

@@ -1,0 +1,262 @@
+<?php
+namespace WDG\CoreBundle\Entity;
+use Doctrine\ORM\Mapping AS ORM;
+
+/**
+ * @ORM\Entity
+ */
+class SfWdgProjects
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="integer", unique=true, nullable=true)
+     */
+    private $wpProjectId;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $projectCreationDate;    
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $projectName;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $projectSlogan;
+
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectDescription;
+
+    
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectCategory;
+
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectBusinessSector;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectFundingType;
+    
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectFundingDuration;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectReturnOnInvestment;    
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectSummary;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectEconomyExcerpt;   
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectSocialExcerpt;   
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectEnvironmentExcerpt;   
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectMission;  
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectEconomy;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectSocial;
+    
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectEnvironment;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectMeasurePerformance;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectGoodPoint;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectContextExcerpt;   
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectMarketExcerpt; 
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectContext;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectMarket;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectWorthOffer;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectClientCollaborator;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectBusinessCore;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectIncome;    
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectCost;    
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectCollaboratorsCanvas;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectActivitiesCanvas;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectRessourcesCanvas;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectWorthOfferCanvas;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectCustomersRelationsCanvas;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectClientsCanvas;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectCostStructureCanvas;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectSourceOfIncomeCanvas;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectFinancialBoard;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectPerspectives;
+
+
+     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectOtherInformation;
+
+    /**
+     * @ORM\OneToOne(targetEntity="SfWdgTasks", inversedBy="projects")
+     * @ORM\JoinColumn(name="sfWdgTasksId", referencedColumnName="id", unique=true)
+     */
+    private $tasks;
+
+    /**
+     * @ORM\OneToOne(targetEntity="SfWdgOrganisations", inversedBy="projects")
+     * @ORM\JoinColumn(name="sfWdgOrganisationsId", referencedColumnName="id", unique=true)
+     */
+    private $organisations;
+
+    /**
+     * @ORM\OneToOne(targetEntity="SfWdgEvents", mappedBy="projects")
+     */
+    private $events;
+
+    /**
+     * @ORM\OneToOne(targetEntity="SfWdgNews", mappedBy="projects")
+     */
+    private $news;
+
+    /**
+     * @ORM\OneToOne(targetEntity="SfWdgDiscussions", mappedBy="projects")
+     */
+    private $discussions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="SfWdgProjectsUsers", mappedBy="projects")
+     */
+    private $projectsUsers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="SfWdgProjectsTags", mappedBy="projects")
+     */
+    private $projectsTags;
+
+    /**
+     * @ORM\OneToMany(targetEntity="SfWdgProjectsComments", mappedBy="projects")
+     */
+    private $projectsComments;
+}

@@ -20,6 +20,11 @@ class SfWdgUsers
     private $wpUserId;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $userCreationDate;    
+
+    /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $userGender;
@@ -195,6 +200,29 @@ class SfWdgUsers
     public function getWpUserId()
     {
         return $this->wpUserId;
+    }
+
+    /**
+     * Set userCreationDate
+     *
+     * @param \DateTime $userCreationDate
+     * @return SfWdgUsers
+     */
+    public function setUserCreationDate($userCreationDate)
+    {
+        $this->userCreationDate = $userCreationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get userCreationDate
+     *
+     * @return \DateTime 
+     */
+    public function getUserCreationDate()
+    {
+        return $this->userCreationDate;
     }
 
     /**
@@ -857,6 +885,7 @@ class SfWdgUsers
     {
         return $this->organisationsMembers;
     }
+
 
     public function __toString()
     {
