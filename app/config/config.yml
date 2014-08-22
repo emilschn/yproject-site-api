@@ -95,6 +95,7 @@ sensio_framework_extra:
 fos_rest:
     param_fetcher_listener: true
     body_listener: true
+    allowed_methods_listener: true
     body_listener:
         decoders:
             json: acme.decoder.json
@@ -114,6 +115,14 @@ fos_rest:
         default_format: json
 
 nelmio_api_doc: ~
+
+nelmio_cors:
+    paths:
+        '^/api/':
+            allow_origin: ['*']
+            allow_headers: ['*']
+            allow_methods: ['POST', 'PUT', 'GET', 'DELETE','OPTIONS']
+            max_age: 3600
 
 liip_cache_control:
     flash_message_listener: true

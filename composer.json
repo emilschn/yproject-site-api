@@ -44,7 +44,8 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "friendsofsymfony/rest-bundle": "1.4.*@dev",
 
-        "mopa/wsse-authentication-bundle": "dev-master"
+        "mopa/wsse-authentication-bundle": "dev-master",
+        "nelmio/cors-bundle": "~1.0"
     },
     "conflict": {
         "symfony/routing": "2.4.1"
