@@ -153,6 +153,7 @@ class UserRestController extends FOSRestController
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            return  $entity->getId();
         }
         return array(
             'form' => $form,
@@ -231,6 +232,7 @@ class UserRestController extends FOSRestController
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+            return  '{"message":"User modified"}';
         }
 
         return array(
