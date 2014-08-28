@@ -34,13 +34,27 @@ class SfWdgProjects
      */
     private $projectSlogan;
 
-
     /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $projectDescription;
 
-    
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectVideo;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectImageVideo;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectImageCover;
+
+
     /**
      * @ORM\Column(type="text", nullable=true)
      */
@@ -66,6 +80,11 @@ class SfWdgProjects
      * @ORM\Column(type="text", nullable=true)
      */
     private $projectReturnOnInvestment;    
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectInvestorBenefit;  
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -190,6 +209,11 @@ class SfWdgProjects
     /**
      * @ORM\Column(type="text", nullable=true)
      */
+    private $projectChainDistributionsCanvas;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
     private $projectClientsCanvas;
 
     /**
@@ -259,7 +283,13 @@ class SfWdgProjects
      * @ORM\OneToMany(targetEntity="SfWdgProjectsComments", mappedBy="projects")
      */
     private $projectsComments;
-    /**
+    
+
+    public function __toString()
+    {
+        return $this->projectName;
+    }
+        /**
      * Constructor
      */
     public function __construct()
@@ -310,7 +340,7 @@ class SfWdgProjects
      */
     public function setProjectCreationDate($projectCreationDate)
     {
-        $this->projectCreationDate = $projectCreationDate;
+        $this->projectCreationDate =  new \DateTime();
 
         return $this;
     }
@@ -392,6 +422,75 @@ class SfWdgProjects
     public function getProjectDescription()
     {
         return $this->projectDescription;
+    }
+
+    /**
+     * Set projectVideo
+     *
+     * @param string $projectVideo
+     * @return SfWdgProjects
+     */
+    public function setProjectVideo($projectVideo)
+    {
+        $this->projectVideo = $projectVideo;
+
+        return $this;
+    }
+
+    /**
+     * Get projectVideo
+     *
+     * @return string 
+     */
+    public function getProjectVideo()
+    {
+        return $this->projectVideo;
+    }
+
+    /**
+     * Set projectImageVideo
+     *
+     * @param string $projectImageVideo
+     * @return SfWdgProjects
+     */
+    public function setProjectImageVideo($projectImageVideo)
+    {
+        $this->projectImageVideo = $projectImageVideo;
+
+        return $this;
+    }
+
+    /**
+     * Get projectImageVideo
+     *
+     * @return string 
+     */
+    public function getProjectImageVideo()
+    {
+        return $this->projectImageVideo;
+    }
+
+    /**
+     * Set projectImageCover
+     *
+     * @param string $projectImageCover
+     * @return SfWdgProjects
+     */
+    public function setProjectImageCover($projectImageCover)
+    {
+        $this->projectImageCover = $projectImageCover;
+
+        return $this;
+    }
+
+    /**
+     * Get projectImageCover
+     *
+     * @return string 
+     */
+    public function getProjectImageCover()
+    {
+        return $this->projectImageCover;
     }
 
     /**
@@ -507,6 +606,29 @@ class SfWdgProjects
     public function getProjectReturnOnInvestment()
     {
         return $this->projectReturnOnInvestment;
+    }
+
+    /**
+     * Set projectInvestorBenefit
+     *
+     * @param string $projectInvestorBenefit
+     * @return SfWdgProjects
+     */
+    public function setProjectInvestorBenefit($projectInvestorBenefit)
+    {
+        $this->projectInvestorBenefit = $projectInvestorBenefit;
+
+        return $this;
+    }
+
+    /**
+     * Get projectInvestorBenefit
+     *
+     * @return string 
+     */
+    public function getProjectInvestorBenefit()
+    {
+        return $this->projectInvestorBenefit;
     }
 
     /**
@@ -1062,6 +1184,29 @@ class SfWdgProjects
     }
 
     /**
+     * Set projectChainDistributionsCanvas
+     *
+     * @param string $projectChainDistributionsCanvas
+     * @return SfWdgProjects
+     */
+    public function setProjectChainDistributionsCanvas($projectChainDistributionsCanvas)
+    {
+        $this->projectChainDistributionsCanvas = $projectChainDistributionsCanvas;
+
+        return $this;
+    }
+
+    /**
+     * Get projectChainDistributionsCanvas
+     *
+     * @return string 
+     */
+    public function getProjectChainDistributionsCanvas()
+    {
+        return $this->projectChainDistributionsCanvas;
+    }
+
+    /**
      * Set projectClientsCanvas
      *
      * @param string $projectClientsCanvas
@@ -1411,10 +1556,5 @@ class SfWdgProjects
     public function getProjectsComments()
     {
         return $this->projectsComments;
-    }
-
-    public function __toString()
-    {
-        return $this->projectName;
     }
 }

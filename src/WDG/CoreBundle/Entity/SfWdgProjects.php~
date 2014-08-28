@@ -34,13 +34,27 @@ class SfWdgProjects
      */
     private $projectSlogan;
 
-
     /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $projectDescription;
 
-    
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectVideo;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectImageVideo;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectImageCover;
+
+
     /**
      * @ORM\Column(type="text", nullable=true)
      */
@@ -66,6 +80,11 @@ class SfWdgProjects
      * @ORM\Column(type="text", nullable=true)
      */
     private $projectReturnOnInvestment;    
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $projectInvestorBenefit;  
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -190,6 +209,11 @@ class SfWdgProjects
     /**
      * @ORM\Column(type="text", nullable=true)
      */
+    private $projectChainDistributionsCanvas;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
     private $projectClientsCanvas;
 
     /**
@@ -259,4 +283,10 @@ class SfWdgProjects
      * @ORM\OneToMany(targetEntity="SfWdgProjectsComments", mappedBy="projects")
      */
     private $projectsComments;
-}
+    
+
+    public function __toString()
+    {
+        return $this->projectName;
+    }
+    }
