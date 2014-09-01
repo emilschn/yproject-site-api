@@ -143,7 +143,7 @@ class ProjectRestController extends FOSRestController
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-            return self::redirectAction($entity, Codes::HTTP_CREATED);
+           return  $entity->getId();
         }
         return array(
             'form' => $form,
@@ -228,8 +228,7 @@ class ProjectRestController extends FOSRestController
             $em = $this->getDoctrine()->getManager();
             $em->persist($project);
             $em->flush();
-
-            return $this->routeRedirectView(null, array(), Codes::HTTP_NO_CONTENT);
+            return  '{"message":"Project modified"}';
         }
         return array(
             'form' => $form,
