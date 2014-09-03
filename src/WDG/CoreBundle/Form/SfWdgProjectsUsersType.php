@@ -17,11 +17,13 @@ class SfWdgProjectsUsersType extends AbstractType
         $builder
             ->add('users', 'entity', array(
                 'class' => 'WDG\CoreBundle\Entity\SfWdgUsers',
+                'property' => 'id',
               )
             )
 
             ->add('roles', 'entity', array(
                 'class' => 'WDG\CoreBundle\Entity\SfWdgRoles',
+                'property' => 'roleSlug',
               )
             )
         ;

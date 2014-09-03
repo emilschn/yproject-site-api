@@ -166,6 +166,6 @@ class SfWdgRoles
 
     public function __toString()
     {
-        return $this->roleName;
+        return $this->roleSlug;
     }
 }

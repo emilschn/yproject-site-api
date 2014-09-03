@@ -24,3 +24,8 @@ organisations_members:
     parent:   organisations
     resource: "WDGCoreBundle:OrganisationsUsersRest"
     name_prefix:  api_organisations_users_
+
+roles:
+    type:     rest
+    resource: "WDGCoreBundle:RoleRest"
+    name_prefix:  api_roles_

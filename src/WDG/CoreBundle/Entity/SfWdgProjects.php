@@ -284,11 +284,6 @@ class SfWdgProjects
      */
     private $projectsComments;
     
-
-    public function __toString()
-    {
-        return $this->projectName;
-    }
         /**
      * Constructor
      */
@@ -1556,5 +1551,10 @@ class SfWdgProjects
     public function getProjectsComments()
     {
         return $this->projectsComments;
+    }
+
+        public function __toString()
+    {
+        return $this->projectName;
     }
 }
