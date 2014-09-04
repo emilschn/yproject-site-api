@@ -73,10 +73,14 @@ class ProjectsUsersRestController extends FOSRestController
     } // "get_users"     [GET] /projects/{id}/members
 
 
-    public function getRolesMembersAction($idProject, $idRole, Request $request)
+    public function getRolesMembersAction($idProject, $slugRole, Request $request)
     {
         $array = '';
         $em = $this->getDoctrine()->getManager();
+
+        $role = $em->getRepository('WDGCoreBundle:SfWdgRoles')->findOneBy(array('roleSlug' => $slugRole));
+        $idRole = $role->getId();
+
         $members = $em->getRepository('WDGCoreBundle:SfWdgProjectsUsers')->findBy(array('projects' => $idProject, 'roles' => $idRole ));
 
         foreach ($members as $member) {
@@ -97,6 +101,14 @@ class ProjectsUsersRestController extends FOSRestController
     //--------------------------------------------------------------------------------------------//
     //----------------------------------------- INSERTION ----------------------------------------//
     //--------------------------------------------------------------------------------------------//
+
+
+    public function newMembersAction($id)
+    {
+        // Affiche les champs du formulaire
+        return $this->createForm(new SfWdgProjectsUsersType());
+    } // "new_users"     [GET] /users/new
+
 
 /**
      * Creates a new user from the submitted data.
@@ -130,16 +142,15 @@ class ProjectsUsersRestController extends FOSRestController
         $form = $this->createForm(new SfWdgProjectsUsersType(), $member);
         $form->handleRequest($request);
 
-
         //Récupération des informations de l'utilisateur
         $user = new SfWdgUsers();
         $user = $form->get('users')->getData();
         $idUser = $user->getId();
 
-
         //Récuperation des informations du rôle
-        $role = new SfWdgRoles();
-        $role = $form->get('roles')->getData();
+        $role_request = $request->request->all();
+        $role_slug = $role_request["projectsUsers"]["roles"];
+        $role = $em->getRepository('WDGCoreBundle:SfWdgRoles')->findOneBy(array('roleSlug' => $role_slug));
         $idRole = $role->getId();
 
         //Récupération des informations du projet ($id = id passé en paramètre de l'URL)
@@ -148,7 +159,6 @@ class ProjectsUsersRestController extends FOSRestController
             throw $this->createNotFoundException("Project not found.");
         }
         
-
         //Ajout de la relation entre l'utilisateur, le role et le projet
         $member->setUsers($user);
         $member->setRoles($role);
@@ -206,25 +216,28 @@ class ProjectsUsersRestController extends FOSRestController
      *
      * @throws NotFoundHttpException when user not exist
      */
-    public function putRolesMembersAction(Request $request, $idProject, $idRole, $idMember)
+    public function putMembersAction(Request $request, $idProject)
     {
         //Entity Manager
         $em = $this->getDoctrine()->getManager();
 
         //Formulaire 
-        $member = $em->getRepository('WDGCoreBundle:SfWdgProjectsUsers')->findOneBy(array('projects' => $idProject, 'users' => $idMember));
+        $member = $em->getRepository('WDGCoreBundle:SfWdgProjectsUsers')->findOneBy(array('projects' => $idProject));
         $form = $this->createForm(new SfWdgProjectsUsersType(), $member);
         $form->bind($request);
+        $requestAll = $request->request->all();
 
-
-        //Récuperation des informations du nouveau rôle
-        $role = new SfWdgRoles();
-        $role = $form->get('roles')->getData();
-        $newIdRole = $role->getId();
 
         //Récupération des informations de l'utilisateur
-        $user = $this->getDoctrine()->getRepository('WDGCoreBundle:SfWdgUsers')->find($idMember);
+        $user_id = $requestAll["projectsUsers"]["users"];
+        $user = $this->getDoctrine()->getRepository('WDGCoreBundle:SfWdgUsers')->find($user_id);
         $newIdUser = $user->getId();
+
+        //Récuperation des informations du nouveau rôle
+        $role_slug = $requestAll["projectsUsers"];
+        $role = $em->getRepository('WDGCoreBundle:SfWdgRoles')->findOneBy(array('roleSlug' => $role_slug));
+        $newIdRole = $role->getId();
+
 
         //Récupération des informations du projet ($id = id passé en paramètre de l'URL)
         $project = $this->getDoctrine()->getRepository('WDGCoreBundle:SfWdgProjects')->find($idProject);
@@ -247,7 +260,7 @@ class ProjectsUsersRestController extends FOSRestController
             return $this->handleView($view);
         return self::redirectAction($member, Codes::HTTP_CREATED);
           
-    }
+    }  //[PUT] projects/{idProject}/roles/{idRole}/users/{idUser}
 
 
     //--------------------------------------------------------------------------------------------//
@@ -272,10 +285,21 @@ class ProjectsUsersRestController extends FOSRestController
      *
      * @throws NotFoundHttpException when user not exist
      */
-    public function deleteRolesMembersAction(Request $request, $idProject, $idRole, $idMember)
+    public function deleteMembersAction(Request $request, $idProject, $idMember)
     {
         //Entity Manager
         $em = $this->getDoctrine()->getManager();
+        $query = $em->createQueryBuilder()
+            ->select('m')
+            ->from('WDGCoreBundle:SfWdgProjectsUsers','m')
+            ->where('m.users = :idUser')
+            ->andWhere('m.projects = :idProject')
+            ->setParameter('idUser', $idMember)
+            ->setParameter('idProject', $idProject)
+            ->getQuery();
+        $idRoleQuery = $query->getResult();
+        $idRole = $idRoleQuery[0]->getRoles()->getId();
+
         $query = $em->createQueryBuilder()
             ->select('m')
             ->from('WDGCoreBundle:SfWdgProjectsUsers','m')
@@ -304,7 +328,7 @@ class ProjectsUsersRestController extends FOSRestController
             $deleteRelation = $query->getResult();
             return $this->routeRedirectView(null, array(), Codes::HTTP_NO_CONTENT);
         }
-    } // "delete_user" [DELETE] /users/{id}
+    } //[DELETE] projects/{idProject}/roles/{idRole}/users/{idUser}
 
     //--------------------------------------------------------------------------------------------//
     //-------------------------------------- AUTRES FONCTIONS ------------------------------------//
@@ -316,12 +340,7 @@ class ProjectsUsersRestController extends FOSRestController
         return $this->handleView($view);
     }
 
-/*    public function getToken($token) {
-         $data = $em->getRepository('WDGCoreBundle:SfWdgToken')->findBy(array('token' => $token));
-         if(!$token) {
-            throw $this->createNotFoundException("Bad token!");
-        }
-    }*/
+
 }
 ?>
 

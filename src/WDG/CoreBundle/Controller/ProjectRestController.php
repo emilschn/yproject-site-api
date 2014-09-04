@@ -88,6 +88,16 @@ class ProjectRestController extends FOSRestController
     } // "get_project"      [GET] /projects/{id}
 
 
+    public function getProjectwpAction($wp_project_id)
+    {
+        $projectwp = $this->getDoctrine()->getRepository('WDGCoreBundle:SfWdgProjects')->findOneBy(array('wpProjectId' => $wp_project_id));
+        if(!is_object($projectwp)){
+          throw $this->createNotFoundException("Project does not exist on Wordpress.");
+      }
+      return $projectwp->getId();
+    } // "get_project"      [GET] /projectwp/{id}
+
+
     //--------------------------------------------------------------------------------------------//
     //----------------------------------------- INSERTION ----------------------------------------//
     //--------------------------------------------------------------------------------------------//

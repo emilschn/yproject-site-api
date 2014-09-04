@@ -886,9 +886,4 @@ class SfWdgUsers
         return $this->organisationsMembers;
     }
 
-
-    public function __toString()
-    {
-        return $this->userName;
-    }
 }

@@ -80,10 +80,10 @@ class RoleRestController extends FOSRestController
      *
      * @throws NotFoundHttpException when role not exist
      */
-    public function getRoleAction($id, Request $request)
+    public function getRoleAction($slug, Request $request)
     {
         // Sélection de le rôle
-        $role = $this->getDoctrine()->getRepository('WDGCoreBundle:SfWdgRoles')->find($id);
+        $role = $this->getDoctrine()->getRepository('WDGCoreBundle:SfWdgRoles')->findOneBy(array('roleSlug' => $slug ));
 
         // Si il n'y a pas d'utilisateur, afficher un message d'erreur
         if(!is_object($role)){
@@ -188,7 +188,7 @@ class RoleRestController extends FOSRestController
     public function editRoleAction(Request $request, $id)
     {
         // On affiche les champs du formulaire 
-        $role = $this->getDoctrine()->getRepository('WDGCoreBundle:SfWdgRoles')->find($id);
+        $role = $this->getDoctrine()->getRepository('WDGCoreBundle:SfWdgRoles')->findOneBy(array('roleSlug' => $slug));
         return $form = $this->createForm(new SfWdgRolesType(), $role);
     } // "edit_role"     [GET] /roles/{id}/edit
 
@@ -217,12 +217,12 @@ class RoleRestController extends FOSRestController
      *
      * @throws NotFoundHttpException when role not exist
      */
-    public function putRolesAction(Request $request, $id)
+    public function putRolesAction(Request $request, $slug)
     {
 
         //On sélectionne le rôle
         $em = $this->getDoctrine()->getManager();
-        $role = $em->getRepository('WDGCoreBundle:SfWdgRoles')->find($id);
+        $role = $em->getRepository('WDGCoreBundle:SfWdgRoles')->findOneBy(array('roleSlug' => $slug));
         //On l'associe au formulaire
         $form = $this->createForm(new SfWdgRolesType(), $role);
         $form->bind($request);
@@ -263,9 +263,9 @@ class RoleRestController extends FOSRestController
      *
      * @throws NotFoundHttpException when role not exist
      */
-    public function deleteRolesAction(Request $request, $id)
+    public function deleteRolesAction(Request $request, $slug)
     {
-        $role = $this->getDoctrine()->getRepository('WDGCoreBundle:SfWdgRoles')->find($id);
+        $role = $this->getDoctrine()->getRepository('WDGCoreBundle:SfWdgRoles')->findOneBy(array('roleSlug' => $slug));
         $em = $this->getDoctrine()->getManager();
         if(!is_object($role)){
           throw $this->createNotFoundException("Role does not exist.");

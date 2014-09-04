@@ -305,6 +305,16 @@ class SfWdgProjects
     }
 
     /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getIdNoPrivate()
+    {
+         return htmlentities($this->id);  
+    }
+
+    /**
      * Set wpProjectId
      *
      * @param integer $wpProjectId
@@ -1557,4 +1567,5 @@ class SfWdgProjects
     {
         return $this->projectName;
     }
+       
 }
