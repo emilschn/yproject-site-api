@@ -134,7 +134,7 @@ class UserRestController extends FOSRestController
      * )
      *
      * @Annotations\View(
-     *   statusCode = Codes::HTTP_BAD_REQUEST
+     *
      * )
      *
      * @param Request $request the request object
