@@ -1,6 +1,6 @@
 security:
     encoders:
-        FOS\UserBundle\Model\UserInterface: sha512
+        Symfony\Component\Security\Core\User\User: plaintext
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -12,8 +12,6 @@ security:
             memory:
                 users:
                     restapi:  { password: secretpw, roles: [ 'ROLE_API' ] }
-        fos_userbundle:
-            id: fos_user.user_provider.username
 
     firewalls:
         dev:
@@ -22,16 +20,7 @@ security:
 
         main:
             pattern: ^/
-            anonymous: true
-            logout: true
+            anonymous: ~
+            stateless:  true
             http_basic:
                 realm: "Demo REST API (username: restapi, password: secretpw)"
-            form_login:
-                provider: fos_userbundle
-                csrf_provider: form.csrf_provider
-
-    access_control:
-        - { path: ^/connection$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/inscription, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
