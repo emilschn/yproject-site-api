@@ -74,7 +74,7 @@ fos_rest:
     param_fetcher_listener: true
     body_listener:
         decoders:
-            json: acme.decoder.json
+            json: fos_rest.decoder.jsontoform
             xml: fos_rest.decoder.xml
     view:
         view_response_listener: 'force'
