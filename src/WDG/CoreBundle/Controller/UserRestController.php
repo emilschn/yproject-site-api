@@ -4,6 +4,7 @@ namespace WDG\CoreBundle\Controller;
 
 use WDG\CoreBundle\Entity\SfWdgUsers;
 use WDG\CoreBundle\Form\SfWdgUsersType;
+use WDG\CoreBundle\Form\SfWdgProjectsUsersType;
 
 use FOS\RestBundle\Util\Codes;
 use FOS\RestBundle\Controller\Annotations;
@@ -93,6 +94,37 @@ class UserRestController extends FOSRestController
         $view = $this->view($user, 200);
         return $this->handleView($view);
     } // "get_user"      [GET] /users/{id}
+    
+    /**
+     * Retourne les projets correspondant à un utilisateur avec un slug défini
+     * @param type $idUser
+     * @param type $slugRole
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return type
+     * @throws type
+     */
+    public function getUserRoleAction($idUser, $slugRole, Request $request) {
+        $array = array();
+        $em = $this->getDoctrine()->getManager();
+
+        $role = $em->getRepository('WDGCoreBundle:SfWdgRoles')->findOneBy(array('roleSlug' => $slugRole));
+        $idRole = $role->getId();
+
+        $projects = $em->getRepository('WDGCoreBundle:SfWdgProjectsUsers')->findBy(array('users' => $idUser, 'roles' => $idRole ));
+
+        foreach ($projects as $project) {
+            $project_item = $em->getRepository('WDGCoreBundle:SfWdgProjects')->findOneBy(array('id' => $project->getProjects()->getId() ));
+            $array[] = $project_item;
+        }
+
+        if(empty($array)) {
+            throw $this->createNotFoundException("No projects");
+        } else {
+            $view = $this->view($array, 200);
+            return $this->handleView($view);
+        }
+	
+    }
 
 
 
