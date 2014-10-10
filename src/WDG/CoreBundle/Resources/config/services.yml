@@ -5,4 +5,7 @@ services:
 #    wdg_core.example:
 #        class: %wdg_core.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
-
+    # wdg_core.listener.kernel.convert_html:
+    #     class: WDG\CoreBundle\EventListener\ConvertToHtmlResponse
+    #     tags:
+    #         - { name: kernel.event_listener, event: kernel.response }
