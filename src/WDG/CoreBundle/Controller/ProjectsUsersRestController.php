@@ -83,14 +83,20 @@ class ProjectsUsersRestController extends FOSRestController
 
         $members = $em->getRepository('WDGCoreBundle:SfWdgProjectsUsers')->findBy(array('projects' => $idProject, 'roles' => $idRole ));
 
-        foreach ($members as $member) {
-            $users = $em->getRepository('WDGCoreBundle:SfWdgUsers')->findOneBy(array('id' => $member->getUsers()->getId() ));
-            $array[] = $users;
-        }
-
-        if(!$users) {
+        if(!$members) {
             throw $this->createNotFoundException("No members");
         } else {
+
+	    foreach ($members as $member) {
+		$user_obj = array(
+		    "id" => $member->getUsers()->getId(), 
+		    "wp_user_id" => $member->getUsers()->getWpUserId(), 
+		    "user_name" => $member->getUsers()->getUserName(), 
+		    "user_surname" => $member->getUsers()->getUserSurname()
+		);
+		$array[] = $user_obj;
+	    }
+
             $view = $this->view($array, 200);
             return $this->handleView($view);
         }
