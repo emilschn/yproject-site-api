@@ -23,17 +23,10 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new Hautelook\TemplatedUriBundle\HautelookTemplatedUriBundle(),
             new Bazinga\Bundle\RestExtraBundle\BazingaRestExtraBundle(),
-
-
-            new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
-            new Mopa\Bundle\WSSEAuthenticationBundle\MopaWSSEAuthenticationBundle(),
-            new Nelmio\CorsBundle\NelmioCorsBundle(),
-
-            new WDG\CoreBundle\WDGCoreBundle(),
+            new WDG\RestBundle\WDGRestBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
-            //$bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();

@@ -8,7 +8,7 @@ root:
 
 wdg_core_homepage:
     path:     /api
-    defaults: { _controller: WDGCoreBundle:Default:index }
+    defaults: { _controller: WDGRestBundle:Default:index }
 
 #API DOC
 NelmioApiDocBundle:

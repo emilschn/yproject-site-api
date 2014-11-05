@@ -1,8 +1,8 @@
 parameters:
     database_driver:   pdo_mysql
     database_host:     localhost
-    database_port:     3306
-    database_name:     sf_wdg_bopp
+    database_port:     ~
+    database_name:     wdg_bopp
     database_user:     root
     database_password: root
 
@@ -11,5 +11,5 @@ parameters:
     mailer_user:       ~
     mailer_password:   ~
 
-    locale:            fr
-    secret:            yProject
+    locale:            en
+    secret:            ThisTokenIsNotSoSecretChangeIt

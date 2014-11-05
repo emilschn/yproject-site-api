@@ -69,7 +69,6 @@ sensio_framework_extra:
     view: { annotations: false }
 
 fos_rest:
-
     #disable_csrf_role: ROLE_API
     param_fetcher_listener: true
     body_listener:
@@ -77,16 +76,14 @@ fos_rest:
             json: fos_rest.decoder.jsontoform
             xml: fos_rest.decoder.xml
     view:
+        mime_types:
+            json: ['application/json', 'application/json;version=1.0', 'application/json;version=1.1']
         view_response_listener: 'force'
         formats:
             xml:  true
             json: true
         templating_formats:
             html: true
-        force_redirects:
-            html: true
-        failed_validation: HTTP_BAD_REQUEST
-        default_engine: twig
     exception:
         codes:
             'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
@@ -97,22 +94,13 @@ fos_rest:
     routing_loader:
         default_format: json
 
-
-nelmio_api_doc: ~
-
-
-
-bazinga_hateoas: ~
-
-bazinga_rest_extra: ~
-
 fos_http_cache:
     cache_control:
         rules:
             # the controls section values are used in a call to Response::setCache();
             -
                 match:
-                    path: ^/api/
+                    path: ^/notes
                     methods: [GET, HEAD]
                 headers:
                     cache_control: { public: true, max_age: 15, s_maxage: 30 }

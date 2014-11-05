@@ -1,0 +1,42 @@
+user : 
+    type: rest
+    resource:     "WDGRestBundle:User"
+    name_prefix:  api_user_
+
+role:
+    type:     rest
+    resource: "WDGRestBundle:Role"
+    name_prefix:  api_role_
+
+project : 
+    type: rest
+    resource:     "WDGRestBundle:Project"
+    name_prefix:  api_project_
+
+project_management:
+    type:     rest
+    parent:   project
+    resource: "WDGRestBundle:ProjectManagement"
+    name_prefix:  api_project_management_
+
+organisation:
+    type:     rest
+    resource: "WDGRestBundle:Organisation"
+    name_prefix:  api_organisation_
+
+organisations_management:
+    type:     rest
+    parent:   organisation
+    resource: "WDGRestBundle:OrganisationManagement"
+    name_prefix:  api_organisation_management_
+
+discussion:
+    type:     rest
+    parent:   project
+    resource: "WDGRestBundle:Discussion"
+    name_prefix:  api_discussion_
+
+event:
+    type:     rest
+    resource: "WDGRestBundle:Event"
+    name_prefix:  api_event_
