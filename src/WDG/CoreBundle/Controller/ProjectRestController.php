@@ -161,12 +161,6 @@ class ProjectRestController extends FOSRestController
     } // "post_projects"    [POST] /projects
 
 
-
-
-
-
-
-
     /**
      * Presents the form to use to update an existing project.
      *
@@ -229,83 +223,30 @@ class ProjectRestController extends FOSRestController
      */
     public function patchProjectsAction(Request $request, $id)
     {
-        $entity = new SfWdgProjects();
-        $form = $this->createFormBuilder($entity)
-            ->add('wpProjectId')
-            ->add('projectCreationDate')
-            ->add('projectName')
-            ->add('projectSlogan')
-            ->add('projectDescription')
-            ->add('projectVideo')
-            ->add('projectImageVideo')
-            ->add('projectImageCover')
-            ->add('projectCategory')
-            ->add('projectBusinessSector')
-            ->add('projectFundingType')
-            ->add('projectFundingDuration')
-            ->add('projectReturnOnInvestment')
-            ->add('projectInvestorBenefit')
-            ->add('projectSummary')
-            ->add('projectEconomyExcerpt')
-            ->add('projectSocialExcerpt')
-            ->add('projectEnvironmentExcerpt')
-            ->add('projectMission')
-            ->add('projectEconomy')
-            ->add('projectSocial')
-            ->add('projectEnvironment')
-            ->add('projectMeasurePerformance')
-            ->add('projectGoodPoint')
-            ->add('projectContextExcerpt')
-            ->add('projectMarketExcerpt')
-            ->add('projectContext')
-            ->add('projectMarket')
-            ->add('projectWorthOffer')
-            ->add('projectClientCollaborator')
-            ->add('projectBusinessCore')
-            ->add('projectIncome')
-            ->add('projectCost')
-            ->add('projectCollaboratorsCanvas')
-            ->add('projectActivitiesCanvas')
-            ->add('projectRessourcesCanvas')
-            ->add('projectWorthOfferCanvas')
-            ->add('projectCustomersRelationsCanvas')
-            ->add('projectChainDistributionsCanvas')
-            ->add('projectClientsCanvas')
-            ->add('projectCostStructureCanvas')
-            ->add('projectSourceOfIncomeCanvas')
-            ->add('projectFinancialBoard')
-            ->add('projectPerspectives')
-            ->add('projectOtherInformation')
-            ->add('tasks')
-            ->add('organisations')
-            ->add('events')
-            ->add('news')
-            ->add('discussions')
-        ->getForm();
-        var_dump($form);
-
-        if ($request->isMethod('PATCH')) {
-/*            $form->submit($request->request->get($form->wpProjectId(), false));
-            $form->submit($request->request->get($form->wpProjecprojectNametId(), false));
-            $form->submit($request->request->get($form->projectSlogan(), false));
-            $form->submit($request->request->get($form->projectDescription(), false));
-            $form->submit($request->request->get($form->projectVideo(), false));*/
-
-
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->flush();
-                return  '{"message":"Project modified"}';
-            }
-            return array(
-                'form' => $form,
-            );
+        
+      
+        $em = $this->getDoctrine()->getManager();
+        $project = $em->getRepository('WDGCoreBundle:SfWdgProjects')->find($id);
+        $form = $this->createForm(new SfWdgProjectsType(), $project);
+        $form->bind($request);
+        echo $_SERVER['REQUEST_METHOD'];
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($project);
+            $em->flush();
+            return  '{"message":"Project modified", "method":"'+$_SERVER['REQUEST_METHOD']+'"}';
         }
+
+        return array(
+            'form' => $form,
+            'method' => $_SERVER['REQUEST_METHOD'],
+        );
     }
 
 
     public function putProjectsAction(Request $request, $id)
     {
+
         $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('WDGCoreBundle:SfWdgProjects')->find($id);
         $form = $this->createForm(new SfWdgProjectsType(), $project);
@@ -315,6 +256,7 @@ class ProjectRestController extends FOSRestController
             $em = $this->getDoctrine()->getManager();
             $em->persist($project);
             $em->flush();
+            
             return  '{"message":"Project modified"}';
         }
         return array(

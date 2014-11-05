@@ -14,6 +14,12 @@ projects_members:
     resource: "WDGCoreBundle:ProjectsUsersRest"
     name_prefix:  api_project_users_
 
+discussions:
+    type:     rest
+    parent:   projects
+    resource: "WDGCoreBundle:DiscussionRest"
+    name_prefix:  api_discussion_
+
 organisations:
     type:     rest
     resource: "WDGCoreBundle:OrganisationRest"

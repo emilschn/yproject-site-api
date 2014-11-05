@@ -36,13 +36,13 @@ class SfWdgDiscussions
 
     /**
      * @ORM\OneToOne(targetEntity="SfWdgProjects", inversedBy="discussions")
-     * @ORM\JoinColumn(name="sfWdgProjectsId", referencedColumnName="id", unique=true)
+     * @ORM\JoinColumn(name="sfWdgProjectsId", referencedColumnName="id", unique=false)
      */
     private $projects;
 
     /**
      * @ORM\OneToOne(targetEntity="SfWdgUsers", inversedBy="discussions")
-     * @ORM\JoinColumn(name="sfWdgUsersId", referencedColumnName="id", unique=true)
+     * @ORM\JoinColumn(name="sfWdgUsersId", referencedColumnName="id", unique=false)
      */
     private $users;
 
@@ -276,5 +276,12 @@ class SfWdgDiscussions
     public function getDiscussionsComments()
     {
         return $this->discussionsComments;
+    }
+
+
+    
+        public function __toString()
+    {
+        return $this->discussionTitle;
     }
 }

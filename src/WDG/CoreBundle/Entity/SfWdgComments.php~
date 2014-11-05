@@ -26,7 +26,7 @@ class SfWdgComments
 
     /**
      * @ORM\OneToOne(targetEntity="SfWdgUsers", inversedBy="comments")
-     * @ORM\JoinColumn(name="sfWdgUsersId", referencedColumnName="id", unique=true)
+     * @ORM\JoinColumn(name="sfWdgUsersId", referencedColumnName="id", unique=false)
      */
     private $users;
 

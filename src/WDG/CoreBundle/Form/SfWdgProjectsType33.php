@@ -2,11 +2,9 @@
 
 namespace WDG\CoreBundle\Form;
 
-//use WDG\CoreBundle\EventListener\PatchSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 
 class SfWdgProjectsType extends AbstractType
 {
@@ -22,9 +20,8 @@ class SfWdgProjectsType extends AbstractType
             ->add('projectName')
             ->add('projectSlogan')
             ->add('projectDescription')
+            ->add('projectImage')
             ->add('projectVideo')
-            ->add('projectImageVideo')
-            ->add('projectImageCover')
             ->add('projectCategory')
             ->add('projectBusinessSector')
             ->add('projectFundingType')
@@ -68,12 +65,6 @@ class SfWdgProjectsType extends AbstractType
             ->add('news')
             ->add('discussions')
         ;
-            var_dump($options['method']);
-         if($options['method'] === 'PATCH') {
-            // Event Subscriber to prepare the submitted data for a PATCH
-            $builder->addEventSubscriber(new PatchSubscriber());
-            
-        }
     }
     
     /**
