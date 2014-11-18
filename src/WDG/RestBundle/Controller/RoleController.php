@@ -69,24 +69,23 @@ class RoleController extends FOSRestController
      * @Annotations\View()
      *
      * @param Request $request the request object
-     * @param int     $id      the role id
+     * @param string     $slug      the role slug
      *
      * @return array
      *
      * @throws NotFoundHttpException when role not exist
      */
-    public function getRoleAction(Request $request, $id)
+    public function getRoleAction(Request $request, $slug)
     {
         
-        $role = $this->getDoctrine()->getRepository('WDGRestBundle:BoppRole')->find($id);
+	$role = $this->getDoctrine()->getRepository('WDGRestBundle:BoppRole')->findOneBy(array('role_slug' => $slug ));
+
         if(!is_object($role)){
             throw $this->createNotFoundException("Role does not exist.");
         }
 
         $view = $this->view($role, 200);
         return $this->handleView($view);
-
-        return $view;
     }
 
     /**
@@ -138,7 +137,7 @@ class RoleController extends FOSRestController
             $em = $this->getDoctrine()->getManager();
             $em->persist($role);
             $em->flush();
-            return  $entity->getId();
+            return $role->getId();
         }
 
         return array(

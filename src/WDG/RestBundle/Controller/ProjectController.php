@@ -138,7 +138,7 @@ class ProjectController extends FOSRestController
             $em = $this->getDoctrine()->getManager();
             $em->persist($project);
             $em->flush();
-            return  $entity->getId();
+            return $project->getId();
         }
 
         return array(

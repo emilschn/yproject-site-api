@@ -188,7 +188,7 @@ class BoppUser
         $this->boppEvents = new ArrayCollection();
         $this->boppEventStatusGuests = new ArrayCollection();
         $this->boppFollows = new ArrayCollection();
-        $this->boppNews = new ArrayCollection();
+//        $this->boppNews = new ArrayCollection();
         $this->boppNewsfeeds = new ArrayCollection();
         $this->boppOrganisationManagements = new ArrayCollection();
         $this->boppProjectManagements = new ArrayCollection();

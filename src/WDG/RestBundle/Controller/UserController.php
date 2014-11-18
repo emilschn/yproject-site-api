@@ -138,7 +138,7 @@ class UserController extends FOSRestController
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-            return  $entity->getId();
+            return $user->getId();
         }
 
         return array(
