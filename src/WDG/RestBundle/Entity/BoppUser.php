@@ -337,7 +337,7 @@ class BoppUser
     /**
      * Set the value of user_birthday_date.
      *
-     * @param datetime $user_birthday_date
+     * @param \DateTime $user_birthday_date
      * @return \Entity\BoppUser
      */
     public function setUserBirthdayDate($user_birthday_date)
@@ -350,7 +350,7 @@ class BoppUser
     /**
      * Get the value of user_birthday_date.
      *
-     * @return datetime
+     * @return \DateTime
      */
     public function getUserBirthdayDate()
     {
@@ -659,12 +659,12 @@ class BoppUser
     /**
      * Set the value of user_signup_date.
      *
-     * @param datetime $user_signup_date
+     * @param \DateTime $user_signup_date
      * @return \Entity\BoppUser
      */
     public function setUserSignupDate($user_signup_date)
     {
-        $this->user_signup_date = $user_signup_date;
+        $this->user_signup_date = new \DateTime();
 
         return $this;
     }
@@ -672,7 +672,7 @@ class BoppUser
     /**
      * Get the value of user_signup_date.
      *
-     * @return datetime
+     * @return \DateTime
      */
     public function getUserSignupDate()
     {
