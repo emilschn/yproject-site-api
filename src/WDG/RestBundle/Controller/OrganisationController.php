@@ -138,7 +138,7 @@ class OrganisationController extends FOSRestController
             $em = $this->getDoctrine()->getManager();
             $em->persist($organisation);
             $em->flush();
-            return  $entity->getId();
+            return $organisation->getId();
         }
 
         return array(

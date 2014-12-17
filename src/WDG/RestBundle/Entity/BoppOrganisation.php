@@ -31,44 +31,54 @@ class BoppOrganisation
     protected $organisation_creation_date;
 
     /**
-     * @ORM\Column(type="string", length=45)
+     * @ORM\Column(type="string", length=100)
      */
-    protected $organisation_immatriculation;
+    protected $organisation_type;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    protected $organisation_head_office;
-
-    /**
-     * @ORM\Column(type="string", length=45)
-     */
-    protected $organisation_APE_code;
+    protected $organisation_legalform;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    protected $organisation_struture_object;
+    protected $organisation_idnumber;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    protected $organisation_legal_representative;
+    protected $organisation_rcs;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $organisation_capital;
+
+    /**
+     * @ORM\Column(type="string", length=200)
+     */
+    protected $organisation_address;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $organisation_postalcode;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    protected $organisation_legal_representative_capacity;
+    protected $organisation_city;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    protected $organisation_kbis_url;
+    protected $organisation_country;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=50)
      */
-    protected $organisation_id_doc_legal_representative;
+    protected $organisation_ape;
 
     /**
      * @ORM\Column(type="text")
@@ -181,187 +191,233 @@ class BoppOrganisation
     }
 
     /**
-     * Set the value of organisation_immatriculation.
+     * Set the value of organisation_type.
      *
-     * @param string $organisation_immatriculation
+     * @param string $organisation_type
      * @return \Entity\BoppOrganisation
      */
-    public function setOrganisationImmatriculation($organisation_immatriculation)
+    public function setOrganisationType($organisation_type)
     {
-        $this->organisation_immatriculation = $organisation_immatriculation;
+        $this->organisation_type = $organisation_type;
 
         return $this;
     }
 
     /**
-     * Get the value of organisation_immatriculation.
+     * Get the value of organisation_type.
      *
      * @return string
      */
-    public function getOrganisationImmatriculation()
+    public function getOrganisationType()
     {
-        return $this->organisation_immatriculation;
+        return $this->organisation_type;
     }
 
     /**
-     * Set the value of organisation_head_office.
+     * Set the value of organisation_legalform.
      *
-     * @param string $organisation_head_office
+     * @param string $organisation_legalform
      * @return \Entity\BoppOrganisation
      */
-    public function setOrganisationHeadOffice($organisation_head_office)
+    public function setOrganisationLegalform($organisation_legalform)
     {
-        $this->organisation_head_office = $organisation_head_office;
+        $this->organisation_legalform = $organisation_legalform;
 
         return $this;
     }
 
     /**
-     * Get the value of organisation_head_office.
+     * Get the value of organisation_legalform.
      *
      * @return string
      */
-    public function getOrganisationHeadOffice()
+    public function getOrganisationLegalform()
     {
-        return $this->organisation_head_office;
+        return $this->organisation_legalform;
     }
 
     /**
-     * Set the value of organisation_APE_code.
+     * Set the value of organisation_idnumber.
      *
-     * @param string $organisation_APE_code
+     * @param string $organisation_idnumber
      * @return \Entity\BoppOrganisation
      */
-    public function setOrganisationAPECode($organisation_APE_code)
+    public function setOrganisationIdnumber($organisation_idnumber)
     {
-        $this->organisation_APE_code = $organisation_APE_code;
+        $this->organisation_idnumber = $organisation_idnumber;
 
         return $this;
     }
 
     /**
-     * Get the value of organisation_APE_code.
+     * Get the value of organisation_idnumber.
      *
      * @return string
      */
-    public function getOrganisationAPECode()
+    public function getOrganisationIdnumber()
     {
-        return $this->organisation_APE_code;
+        return $this->organisation_idnumber;
     }
 
     /**
-     * Set the value of organisation_struture_object.
+     * Set the value of organisation_rcs.
      *
-     * @param string $organisation_struture_object
+     * @param string $organisation_rcs
      * @return \Entity\BoppOrganisation
      */
-    public function setOrganisationStrutureObject($organisation_struture_object)
+    public function setOrganisationRcs($organisation_rcs)
     {
-        $this->organisation_struture_object = $organisation_struture_object;
+        $this->organisation_rcs = $organisation_rcs;
 
         return $this;
     }
 
     /**
-     * Get the value of organisation_struture_object.
+     * Get the value of organisation_rcs.
      *
      * @return string
      */
-    public function getOrganisationStrutureObject()
+    public function getOrganisationRcs()
     {
-        return $this->organisation_struture_object;
+        return $this->organisation_rcs;
     }
 
     /**
-     * Set the value of organisation_legal_representative.
+     * Set the value of organisation_capital.
      *
-     * @param string $organisation_legal_representative
+     * @param string $organisation_capital
      * @return \Entity\BoppOrganisation
      */
-    public function setOrganisationLegalRepresentative($organisation_legal_representative)
+    public function setOrganisationCapital($organisation_capital)
     {
-        $this->organisation_legal_representative = $organisation_legal_representative;
+        $this->organisation_capital = $organisation_capital;
 
         return $this;
     }
 
     /**
-     * Get the value of organisation_legal_representative.
+     * Get the value of organisation_capital.
      *
      * @return string
      */
-    public function getOrganisationLegalRepresentative()
+    public function getOrganisationCapital()
     {
-        return $this->organisation_legal_representative;
+        return $this->organisation_capital;
     }
 
     /**
-     * Set the value of organisation_legal_representative_capacity.
+     * Set the value of organisation_address.
      *
-     * @param string $organisation_legal_representative_capacity
+     * @param string $organisation_address
      * @return \Entity\BoppOrganisation
      */
-    public function setOrganisationLegalRepresentativeCapacity($organisation_legal_representative_capacity)
+    public function setOrganisationAddress($organisation_address)
     {
-        $this->organisation_legal_representative_capacity = $organisation_legal_representative_capacity;
+        $this->organisation_address = $organisation_address;
 
         return $this;
     }
 
     /**
-     * Get the value of organisation_legal_representative_capacity.
+     * Get the value of organisation_address.
      *
      * @return string
      */
-    public function getOrganisationLegalRepresentativeCapacity()
+    public function getOrganisationAddress()
     {
-        return $this->organisation_legal_representative_capacity;
+        return $this->organisation_address;
     }
 
     /**
-     * Set the value of organisation_kbis_url.
+     * Set the value of organisation_postalcode.
      *
-     * @param string $organisation_kbis_url
+     * @param string $organisation_postalcode
      * @return \Entity\BoppOrganisation
      */
-    public function setOrganisationKbisUrl($organisation_kbis_url)
+    public function setOrganisationPostalcode($organisation_postalcode)
     {
-        $this->organisation_kbis_url = $organisation_kbis_url;
+        $this->organisation_postalcode = $organisation_postalcode;
 
         return $this;
     }
 
     /**
-     * Get the value of organisation_kbis_url.
+     * Get the value of organisation_postalcode.
      *
      * @return string
      */
-    public function getOrganisationKbisUrl()
+    public function getOrganisationPostalcode()
     {
-        return $this->organisation_kbis_url;
+        return $this->organisation_postalcode;
     }
 
     /**
-     * Set the value of organisation_id_doc_legal_representative.
+     * Set the value of organisation_city.
      *
-     * @param string $organisation_id_doc_legal_representative
+     * @param string $organisation_city
      * @return \Entity\BoppOrganisation
      */
-    public function setOrganisationIdDocLegalRepresentative($organisation_id_doc_legal_representative)
+    public function setOrganisationCity($organisation_city)
     {
-        $this->organisation_id_doc_legal_representative = $organisation_id_doc_legal_representative;
+        $this->organisation_city = $organisation_city;
 
         return $this;
     }
 
     /**
-     * Get the value of organisation_id_doc_legal_representative.
+     * Get the value of organisation_city.
      *
      * @return string
      */
-    public function getOrganisationIdDocLegalRepresentative()
+    public function getOrganisationCity()
     {
-        return $this->organisation_id_doc_legal_representative;
+        return $this->organisation_city;
+    }
+
+    /**
+     * Set the value of organisation_country.
+     *
+     * @param string $organisation_country
+     * @return \Entity\BoppOrganisation
+     */
+    public function setOrganisationCountry($organisation_country)
+    {
+        $this->organisation_country = $organisation_country;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of organisation_country.
+     *
+     * @return string
+     */
+    public function getOrganisationCountry()
+    {
+        return $this->organisation_country;
+    }
+
+    /**
+     * Set the value of organisation_ape.
+     *
+     * @param string $organisation_ape
+     * @return \Entity\BoppOrganisation
+     */
+    public function setOrganisationApe($organisation_ape)
+    {
+        $this->organisation_ape = $organisation_ape;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of organisation_ape.
+     *
+     * @return string
+     */
+    public function getOrganisationApe()
+    {
+        return $this->organisation_ape;
     }
 
     /**

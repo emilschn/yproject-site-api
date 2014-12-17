@@ -35,6 +35,6 @@ class BoppRoleType extends AbstractType
      */
     public function getName()
     {
-        return 'wdg_restbundle_bopprole';
+        return 'role';
     }
 }
