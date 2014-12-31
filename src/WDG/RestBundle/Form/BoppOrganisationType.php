@@ -15,6 +15,7 @@ class BoppOrganisationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('organisation_wpref')
             ->add('organisation_name')
             ->add('organisation_creation_date')
             ->add('organisation_type')

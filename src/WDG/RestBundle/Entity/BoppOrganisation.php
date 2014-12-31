@@ -21,6 +21,11 @@ class BoppOrganisation
     protected $id;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $organisation_wpref;
+
+    /**
      * @ORM\Column(type="string", length=45)
      */
     protected $organisation_name;
@@ -142,6 +147,29 @@ class BoppOrganisation
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set the value of organisation_wpref.
+     *
+     * @param integer $organisation_wpref
+     * @return \Entity\BoppOrganisation
+     */
+    public function setOrganisationWpref($organisation_wpref)
+    {
+        $this->organisation_wpref = $organisation_wpref;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of organisation_wpref.
+     *
+     * @return integer
+     */
+    public function getOrganisationWpref()
+    {
+        return $this->organisation_wpref;
     }
 
     /**

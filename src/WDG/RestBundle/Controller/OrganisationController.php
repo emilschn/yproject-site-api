@@ -82,11 +82,26 @@ class OrganisationController extends FOSRestController
         if(!is_object($organisation)){
             throw $this->createNotFoundException("Organisation does not exist.");
         }
+	
+	$buffer = array(
+	    "id" => $organisation->getId(),
+	    "organisation_wpref" => $organisation->getOrganisationWpref(),
+	    "organisation_name" => $organisation->getOrganisationName(),
+	    "organisation_creation_date" => $organisation->getOrganisationCreationDate(),
+	    "organisation_type" => $organisation->getOrganisationType(),
+	    "organisation_legalform" => $organisation->getOrganisationLegalform(),
+	    "organisation_idnumber" => $organisation->getOrganisationIdnumber(),
+	    "organisation_rcs" => $organisation->getOrganisationRcs(),
+	    "organisation_capital" => $organisation->getOrganisationCapital(),
+	    "organisation_address" => $organisation->getOrganisationAddress(),
+	    "organisation_postalcode" => $organisation->getOrganisationPostalcode(),
+	    "organisation_city" => $organisation->getOrganisationCity(),
+	    "organisation_country" => $organisation->getOrganisationCountry(),
+	    "organisation_ape" => $organisation->getOrganisationApe()
+	);
 
-        $view = $this->view($organisation, 200);
+        $view = $this->view($buffer, 200);
         return $this->handleView($view);
-
-        return $view;
     }
 
     /**
