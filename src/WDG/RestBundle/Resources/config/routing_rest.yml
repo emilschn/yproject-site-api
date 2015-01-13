@@ -19,6 +19,12 @@ project_management:
     resource: "WDGRestBundle:ProjectManagement"
     name_prefix:  api_project_management_
 
+project_organisation_management:
+    type:     rest
+    parent:   project
+    resource: "WDGRestBundle:ProjectOrganisationManagement"
+    name_prefix:  api_project_organisation_management_
+
 organisation:
     type:     rest
     resource: "WDGRestBundle:Organisation"

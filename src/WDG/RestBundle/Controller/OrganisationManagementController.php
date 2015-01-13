@@ -104,7 +104,7 @@ class OrganisationManagementController extends FOSRestController
         foreach ($members as $member) {
         $user_obj = array(
             "id" => $member->getBoppUser()->getId(), 
-            "wp_user_id" => $member->getBoppUser()->getWpUserId(), 
+            "wp_user_id" => $member->getBoppUser()->getUserWpId(), 
             "user_name" => $member->getBoppUser()->getUserName(), 
             "user_surname" => $member->getBoppUser()->getUserSurname()
         );

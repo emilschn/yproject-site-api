@@ -88,6 +88,60 @@ class ProjectController extends FOSRestController
 
         return $view;
     }
+    
+    /**
+     * Get organisations from a project id and a role slug
+     *
+     * @ApiDoc(
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     *
+     * @Annotations\View()
+     *
+     * @param Request $request the request object
+     * @param int     $id      the project id
+     * @param string  $slug    the role slug
+     *
+     * @return array
+     *
+     * @throws NotFoundHttpException when user not exist
+     */
+    public function getProjectRoleOrganisationsAction(Request $request, $id, $slug) {
+        $project = $this->getDoctrine()->getRepository('WDGRestBundle:BoppProject')->find($id);
+        $role = $this->getDoctrine()->getRepository('WDGRestBundle:BoppRole')->findOneBy(array(
+	    'role_slug' => $slug
+	));
+	
+        $projectManagement = $this->getDoctrine()->getRepository('WDGRestBundle:BoppProjectOrganisationManagement')->findBy(array(
+	    'boppRole' => $role,
+	    'boppProject' => $project
+	));
+	
+	$buffer = array();
+        if ($projectManagement) {
+	    foreach ($projectManagement as $projectLinked) {
+		$organisation_obj = $projectLinked->getBoppOrganisation();
+		$organisation_buffer = array(
+		    "id" => $organisation_obj->getId(),
+		    "organisation_wpref" => $organisation_obj->getOrganisationWpref(),
+		    "organisation_name" => $organisation_obj->getOrganisationName()
+		);
+		$buffer[] = $organisation_buffer;
+	    }
+        }
+	
+	if(count($buffer) > 0) {
+	    //Display project
+	    $view = $this->view($buffer, 200);
+	    return $this->handleView($view);
+	} else {
+	    // Display error message
+	    throw $this->createNotFoundException("No organisation");
+	}
+    }
 
     /**
      * Presents the form to use to create a new project.
