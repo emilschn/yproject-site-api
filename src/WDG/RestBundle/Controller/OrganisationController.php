@@ -88,6 +88,7 @@ class OrganisationController extends FOSRestController
 	    "organisation_wpref" => $organisation->getOrganisationWpref(),
 	    "organisation_name" => $organisation->getOrganisationName(),
 	    "organisation_creation_date" => $organisation->getOrganisationCreationDate(),
+	    "organisation_strong_authentication" => $organisation->getOrganisationStrongAuthentication(),
 	    "organisation_type" => $organisation->getOrganisationType(),
 	    "organisation_legalform" => $organisation->getOrganisationLegalform(),
 	    "organisation_idnumber" => $organisation->getOrganisationIdnumber(),
@@ -97,7 +98,11 @@ class OrganisationController extends FOSRestController
 	    "organisation_postalcode" => $organisation->getOrganisationPostalcode(),
 	    "organisation_city" => $organisation->getOrganisationCity(),
 	    "organisation_country" => $organisation->getOrganisationCountry(),
-	    "organisation_ape" => $organisation->getOrganisationApe()
+	    "organisation_ape" => $organisation->getOrganisationApe(),
+	    "organisation_bank_owner" => $organisation->getOrganisationBankOwner(),
+	    "organisation_bank_address" => $organisation->getOrganisationBankAddress(),
+	    "organisation_bank_iban" => $organisation->getOrganisationBankIban(),
+	    "organisation_bank_bic" => $organisation->getOrganisationBankBic()
 	);
 
         $view = $this->view($buffer, 200);

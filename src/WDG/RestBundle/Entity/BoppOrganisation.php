@@ -36,6 +36,11 @@ class BoppOrganisation
     protected $organisation_creation_date;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $organisation_strong_authentication;
+
+    /**
      * @ORM\Column(type="string", length=100)
      */
     protected $organisation_type;
@@ -86,14 +91,29 @@ class BoppOrganisation
     protected $organisation_ape;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=100)
      */
-    protected $organisation_website_url;
+    protected $organisation_bank_owner;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $organisation_bank_address;
+
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    protected $organisation_bank_iban;
+
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    protected $organisation_bank_bic;
+    
     /**
      * @ORM\Column(type="text")
      */
-    protected $organisation_societe_url;
+    protected $organisation_website_url;
 
     /**
      * @ORM\Column(type="text")
@@ -216,6 +236,29 @@ class BoppOrganisation
     public function getOrganisationCreationDate()
     {
         return $this->organisation_creation_date;
+    }
+
+    /**
+     * Set the value of organisation_strong_authentication.
+     *
+     * @param datetime $organisation_strong_authentication
+     * @return \Entity\BoppOrganisation
+     */
+    public function setOrganisationStrongAuthentication($organisation_strong_authentication)
+    {
+        $this->organisation_strong_authentication = $organisation_strong_authentication;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of organisation_strong_authentication.
+     *
+     * @return datetime
+     */
+    public function getOrganisationStrongAuthentication()
+    {
+        return $this->organisation_strong_authentication;
     }
 
     /**
@@ -449,6 +492,98 @@ class BoppOrganisation
     }
 
     /**
+     * Set the value of organisation_bank_owner.
+     *
+     * @param string $organisation_bank_owner
+     * @return \Entity\BoppOrganisation
+     */
+    public function setOrganisationBankOwner($organisation_bank_owner)
+    {
+        $this->organisation_bank_owner = $organisation_bank_owner;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of organisation_bank_owner.
+     *
+     * @return string
+     */
+    public function getOrganisationBankOwner()
+    {
+        return $this->organisation_bank_owner;
+    }
+
+    /**
+     * Set the value of organisation_bank_address.
+     *
+     * @param string $organisation_bank_address
+     * @return \Entity\BoppOrganisation
+     */
+    public function setOrganisationBankAddress($organisation_bank_address)
+    {
+        $this->organisation_bank_address = $organisation_bank_address;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of organisation_bank_address.
+     *
+     * @return string
+     */
+    public function getOrganisationBankAddress()
+    {
+        return $this->organisation_bank_address;
+    }
+
+    /**
+     * Set the value of organisation_bank_iban.
+     *
+     * @param string $organisation_bank_iban
+     * @return \Entity\BoppOrganisation
+     */
+    public function setOrganisationBankIban($organisation_bank_iban)
+    {
+        $this->organisation_bank_iban = $organisation_bank_iban;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of organisation_bank_iban.
+     *
+     * @return string
+     */
+    public function getOrganisationBankIban()
+    {
+        return $this->organisation_bank_iban;
+    }
+
+    /**
+     * Set the value of organisation_bank_bic.
+     *
+     * @param string $organisation_bank_bic
+     * @return \Entity\BoppOrganisation
+     */
+    public function setOrganisationBankBic($organisation_bank_bic)
+    {
+        $this->organisation_bank_bic = $organisation_bank_bic;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of organisation_bank_bic.
+     *
+     * @return string
+     */
+    public function getOrganisationBankBic()
+    {
+        return $this->organisation_bank_bic;
+    }
+
+    /**
      * Set the value of organisation_website_url.
      *
      * @param string $organisation_website_url
@@ -469,29 +604,6 @@ class BoppOrganisation
     public function getOrganisationWebsiteUrl()
     {
         return $this->organisation_website_url;
-    }
-
-    /**
-     * Set the value of organisation_societe_url.
-     *
-     * @param string $organisation_societe_url
-     * @return \Entity\BoppOrganisation
-     */
-    public function setOrganisationSocieteUrl($organisation_societe_url)
-    {
-        $this->organisation_societe_url = $organisation_societe_url;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of organisation_societe_url.
-     *
-     * @return string
-     */
-    public function getOrganisationSocieteUrl()
-    {
-        return $this->organisation_societe_url;
     }
 
     /**
@@ -624,6 +736,6 @@ class BoppOrganisation
 
     public function __sleep()
     {
-        return array('id', 'organisation_name', 'organisation_creation_date', 'organisation_immatriculation', 'organisation_head_office', 'organisation_APE_code', 'organisation_struture_object', 'organisation_legal_representative', 'organisation_legal_representative_capacity', 'organisation_kbis_url', 'organisation_id_doc_legal_representative', 'organisation_website_url', 'organisation_societe_url', 'organisation_twitter_url', 'organisation_facebook_url', 'organisation_linkedin_url', 'organisation_viadeo_url');
+        return array('id', 'organisation_name', 'organisation_creation_date', 'organisation_website_url', 'organisation_twitter_url', 'organisation_facebook_url', 'organisation_linkedin_url', 'organisation_viadeo_url');
     }
 }
