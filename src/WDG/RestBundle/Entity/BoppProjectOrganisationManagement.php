@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Entity\BoppProjectOrganisationManagement
  *
  * @ORM\Entity(repositoryClass="BoppProjectOrganisationManagementRepository")
- * @ORM\Table(name="bopp_project_organisation_management", indexes={@ORM\Index(name="fk_bopp_user_has_bopp_role_bopp_role1_idx", columns={"bopp_role_id"}), @ORM\Index(name="fk_bopp_user_has_bopp_role_bopp_organisation_idx", columns={"bopp_organisation_id"}), @ORM\Index(name="fk_bopp_user_has_bopp_role_bopp_project1_idx", columns={"bopp_project_id"})})
+ * @ORM\Table(name="bopp_project_orga_management", indexes={@ORM\Index(name="fk_bopp_user_has_bopp_role_bopp_role1_idx", columns={"bopp_role_id"}), @ORM\Index(name="fk_bopp_user_has_bopp_role_bopp_organisation_idx", columns={"bopp_organisation_id"}), @ORM\Index(name="fk_bopp_user_has_bopp_role_bopp_project1_idx", columns={"bopp_project_id"})})
  */
 class BoppProjectOrganisationManagement
 {
